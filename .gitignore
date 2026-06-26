@@ -1,0 +1,15 @@
+# IDE / build files
+.vs/
+.vscode/
+.idea/
+*.sln
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
+
+# Unreal generated — regenerable, never commit
+Binaries/
+Intermediate/
+DerivedDataCache/
+Saved/
