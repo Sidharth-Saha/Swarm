@@ -16,6 +16,9 @@ ASwarmPawn::ASwarmPawn()
 	// Setup root component
 	RootComponent = CreateDefaultSubobject<USphereComponent>("RootComponent");
 	
+	// Initialize mesh
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	
 	// Initialize camera boom
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->bUsePawnControlRotation = false;
