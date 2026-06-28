@@ -18,6 +18,7 @@ ASwarmPawn::ASwarmPawn()
 	
 	// Initialize mesh
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	Mesh->SetupAttachment(RootComponent);
 	
 	// Initialize camera boom
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
