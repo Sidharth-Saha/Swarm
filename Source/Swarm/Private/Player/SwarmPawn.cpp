@@ -13,22 +13,22 @@ ASwarmPawn::ASwarmPawn()
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	// Setup root component
-	RootComponent = CreateDefaultSubobject<USphereComponent>("RootComponent");
+	// Initialize root component
+	RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
 	
 	// Initialize mesh
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(RootComponent);
 	
 	// Initialize camera boom
-	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->bUsePawnControlRotation = false;
 	CameraBoom->bDoCollisionTest = false;
 	CameraBoom->SetRelativeRotation(FRotator(-60.0f, 0.0f, 0.0f));
 	CameraBoom->SetupAttachment(RootComponent);
 	
 	// Initialize camera
-	TopDownCamera = CreateDefaultSubobject<UCameraComponent>("TopDownCamera");
+	TopDownCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("TopDownCamera"));
 	TopDownCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 }
 
