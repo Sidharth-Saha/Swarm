@@ -5,6 +5,7 @@
 
 #include "Components/SphereComponent.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
@@ -30,6 +31,9 @@ ASwarmPawn::ASwarmPawn()
 	// Initialize camera
 	TopDownCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("TopDownCamera"));
 	TopDownCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
+	
+	// Initialize movement component
+	MovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("MovementComponent"));
 }
 
 // Called when the game starts or when spawned

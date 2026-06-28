@@ -35,4 +35,7 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Mesh", meta=(AllowPrivateAccess="true"))
 	TObjectPtr<UStaticMeshComponent> Mesh;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<class UFloatingPawnMovement> MovementComponent;
 };
