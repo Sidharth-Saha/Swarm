@@ -82,7 +82,8 @@ void ASwarmPawn::Move(const FInputActionValue& Value)
 {
 	const FVector2D Input = Value.Get<FVector2D>();
 	
-	unimplemented();
+	AddMovementInput(FVector::ForwardVector, Input.X);
+	AddMovementInput(FVector::RightVector, Input.Y);
 }
 
 void ASwarmPawn::Aim(const FInputActionValue& Value)
