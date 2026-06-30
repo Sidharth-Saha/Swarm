@@ -49,7 +49,10 @@ void ASwarmPawn::BeginPlay()
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
 			ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer()))
 		{
-			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+			if (ensure(DefaultMappingContext))
+			{
+				Subsystem->AddMappingContext(DefaultMappingContext, 0);
+			}
 		}
 	}
 }
