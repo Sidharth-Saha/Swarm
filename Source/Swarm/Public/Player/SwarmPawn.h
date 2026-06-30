@@ -6,6 +6,9 @@
 #include "GameFramework/Pawn.h"
 #include "SwarmPawn.generated.h"
 
+class UInputAction;
+struct FInputActionValue;
+
 UCLASS()
 class SWARM_API ASwarmPawn : public APawn
 {
@@ -41,4 +44,17 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputMappingContext> DefaultMappingContext;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UInputAction> MoveAction;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UInputAction> AimAction;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UInputAction> FireAction;
+	
+	void Move(const FInputActionValue& Value);
+	void Aim(const FInputActionValue& Value);
+	void StartFire(const FInputActionValue& Value);
 };

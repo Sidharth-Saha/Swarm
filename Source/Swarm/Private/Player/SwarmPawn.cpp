@@ -3,6 +3,7 @@
 
 #include "Player/SwarmPawn.h"
 
+#include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Components/SphereComponent.h"
 #include "Camera/CameraComponent.h"
@@ -67,5 +68,33 @@ void ASwarmPawn::Tick(float DeltaTime)
 void ASwarmPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	
+	// Bind input actions
+	if (UEnhancedInputComponent* EIC = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EIC->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASwarmPawn::Move);
+		EIC->BindAction(AimAction, ETriggerEvent::Triggered, this, &ASwarmPawn::Aim);
+		EIC->BindAction(FireAction, ETriggerEvent::Started, this, &ASwarmPawn::StartFire);
+	}
 }
 
+void ASwarmPawn::Move(const FInputActionValue& Value)
+{
+	const FVector2D Input = Value.Get<FVector2D>();
+	
+	unimplemented();
+}
+
+void ASwarmPawn::Aim(const FInputActionValue& Value)
+{
+	const FVector2D Input = Value.Get<FVector2D>();
+	
+	unimplemented();
+}
+
+void ASwarmPawn::StartFire(const FInputActionValue& Value)
+{
+	const bool bPressed = Value.Get<bool>();
+	
+	unimplemented();
+}
