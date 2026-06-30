@@ -3,8 +3,10 @@
 
 #include "Player/SwarmPawn.h"
 
+#include "EnhancedInputSubsystems.h"
 #include "Components/SphereComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Engine/LocalPlayer.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -41,6 +43,15 @@ void ASwarmPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// Setup input context mapping
+	if (APlayerController* PC = Cast<APlayerController>(GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
+			ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PC->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		}
+	}
 }
 
 // Called every frame
