@@ -56,6 +56,9 @@ void ASwarmPawn::BeginPlay()
 			}
 		}
 	}
+	
+	// Cache initial mesh rotation
+	InitialMeshRotation = Mesh->GetRelativeRotation().Quaternion();
 }
 
 // Called every frame
@@ -65,6 +68,7 @@ void ASwarmPawn::Tick(float DeltaTime)
 	
 	// Update aim direction for mouse input
 	UpdateMouseAim();
+	UpdateMeshTransform();
 }
 
 // Called to bind functionality to input
@@ -123,4 +127,10 @@ void ASwarmPawn::UpdateMouseAim()
 			}
 		}
 	}
+}
+
+void ASwarmPawn::UpdateMeshTransform()
+{
+	const FQuat Final = AimDirection.ToOrientationQuat() * InitialMeshRotation;
+	Mesh->SetRelativeRotation(Final);
 }

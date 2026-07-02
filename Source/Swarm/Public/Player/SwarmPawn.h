@@ -58,10 +58,12 @@ private:
 	float AimDeadzone = 0.25f;
 	
 	FVector AimDirection;
+	FQuat InitialMeshRotation;
 	
 	void Move(const FInputActionValue& Value);
 	void Aim(const FInputActionValue& Value);
 	void StartFire(const FInputActionValue& Value);
 	
 	void UpdateMouseAim();
+	void UpdateMeshTransform();
 };
