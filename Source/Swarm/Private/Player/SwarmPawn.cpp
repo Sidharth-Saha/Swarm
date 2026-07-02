@@ -62,6 +62,9 @@ void ASwarmPawn::BeginPlay()
 void ASwarmPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	// Update aim direction for mouse input
+	UpdateMouseAim();
 }
 
 // Called to bind functionality to input
@@ -90,7 +93,11 @@ void ASwarmPawn::Aim(const FInputActionValue& Value)
 {
 	const FVector2D Input = Value.Get<FVector2D>();
 	
-	unimplemented();
+	// if input exceeds deadzone update aim direction
+	if (Input.SizeSquared() > FMath::Square(AimDeadzone))
+	{
+		AimDirection = FVector(Input.X, Input.Y, 0.0f).GetSafeNormal();
+	}
 }
 
 void ASwarmPawn::StartFire(const FInputActionValue& Value)
@@ -98,4 +105,22 @@ void ASwarmPawn::StartFire(const FInputActionValue& Value)
 	const bool bPressed = Value.Get<bool>();
 	
 	unimplemented();
+}
+
+void ASwarmPawn::UpdateMouseAim()
+{
+	APlayerController* PC = Cast<APlayerController>(GetController());
+	if (PC)
+	{
+		FHitResult Hit;
+		if (PC->GetHitResultUnderCursor(ECC_Visibility, false, Hit))
+		{
+			const FVector ToCursor = Hit.Location - GetActorLocation();
+			const FVector Flat = FVector(ToCursor.X, ToCursor.Y, 0.0f);
+			if (!Flat.IsNearlyZero())
+			{
+				AimDirection = Flat.GetSafeNormal();
+			}
+		}
+	}
 }

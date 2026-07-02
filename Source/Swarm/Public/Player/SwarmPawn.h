@@ -54,7 +54,14 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputAction> FireAction;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	float AimDeadzone = 0.25f;
+	
+	FVector AimDirection;
+	
 	void Move(const FInputActionValue& Value);
 	void Aim(const FInputActionValue& Value);
 	void StartFire(const FInputActionValue& Value);
+	
+	void UpdateMouseAim();
 };
