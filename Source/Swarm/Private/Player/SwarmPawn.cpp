@@ -114,17 +114,20 @@ void ASwarmPawn::StartFire(const FInputActionValue& Value)
 void ASwarmPawn::UpdateMouseAim()
 {
 	APlayerController* PC = Cast<APlayerController>(GetController());
-	if (PC)
+	
+	FVector WorldOrigin, WorldDirection;
+	if (PC->DeprojectMousePositionToWorld(WorldOrigin, WorldDirection))
 	{
-		FHitResult Hit;
-		if (PC->GetHitResultUnderCursor(ECC_Visibility, false, Hit))
+		const FVector PawnLocation = GetActorLocation();
+		const FPlane AimPlane(PawnLocation, FVector::UpVector);
+		const FVector Intersection = FMath::RayPlaneIntersection(WorldOrigin, WorldDirection, AimPlane);
+		
+		const FVector ToTarget = Intersection - PawnLocation;
+		const FVector Flat = FVector(ToTarget.X, ToTarget.Y, 0.0f);
+		
+		if (!Flat.IsNearlyZero())
 		{
-			const FVector ToCursor = Hit.Location - GetActorLocation();
-			const FVector Flat = FVector(ToCursor.X, ToCursor.Y, 0.0f);
-			if (!Flat.IsNearlyZero())
-			{
-				AimDirection = Flat.GetSafeNormal();
-			}
+			AimDirection = Flat.GetSafeNormal();
 		}
 	}
 }
