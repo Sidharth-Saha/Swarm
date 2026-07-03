@@ -3,6 +3,7 @@
 
 #include "Weapons/Projectile.h"
 
+#include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 
 // Sets default values
@@ -10,6 +11,9 @@ AProjectile::AProjectile()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
+	// Initialize root component
+	RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
 	
 	// Initialize the mesh
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
