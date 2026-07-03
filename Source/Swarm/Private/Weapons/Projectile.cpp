@@ -17,6 +17,7 @@ AProjectile::AProjectile()
 	
 	// Initialize the mesh
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
+	Mesh->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
