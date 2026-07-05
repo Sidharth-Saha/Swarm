@@ -22,6 +22,7 @@ AProjectile::AProjectile()
 	
 	// Initialize movement component
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("MovementComponent"));
+	MovementComponent->ProjectileGravityScale = 0.0f;
 }
 
 // Called when the game starts or when spawned
