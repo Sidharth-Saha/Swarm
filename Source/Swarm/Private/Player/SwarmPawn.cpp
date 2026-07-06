@@ -10,6 +10,7 @@
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Weapons/Projectile.h"
 
 // Sets default values
 ASwarmPawn::ASwarmPawn()
@@ -43,6 +44,8 @@ ASwarmPawn::ASwarmPawn()
 void ASwarmPawn::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	ensureMsgf(ProjectileClass, TEXT("ProjectileClass not set on %s"), *GetName());
 	
 	// Setup input context mapping
 	if (APlayerController* PC = Cast<APlayerController>(GetController()))
