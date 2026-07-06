@@ -8,6 +8,7 @@
 #include "Components/SphereComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Engine/LocalPlayer.h"
+#include "Engine/World.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Weapons/Projectile.h"
@@ -111,7 +112,26 @@ void ASwarmPawn::StartFire(const FInputActionValue& Value)
 {
 	const bool bPressed = Value.Get<bool>();
 	
-	// TODO be implemented
+	float Now = GetWorld()->GetTimeSeconds();
+	if (ProjectileClass && Now - LastFireTime >= FireInterval)
+	{
+		// Spawn projectile
+		const FVector SpawnLocation = GetActorLocation() + (AimDirection * MuzzleOffset);
+		const FRotator SpawnRotation = AimDirection.Rotation();
+		
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.Instigator = this;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, SpawnParams);
+		
+		// Reset cooldown
+		if (Projectile)
+		{
+			LastFireTime = Now;
+		}
+	}
 }
 
 void ASwarmPawn::UpdateMouseAim()

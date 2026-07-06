@@ -63,8 +63,13 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	float FireInterval = 0.2f;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	float MuzzleOffset = 75.0f;
+	
 	FVector AimDirection;
 	FQuat InitialMeshRotation;
+	
+	float LastFireTime = 0.0f;
 	
 	void Move(const FInputActionValue& Value);
 	void Aim(const FInputActionValue& Value);
