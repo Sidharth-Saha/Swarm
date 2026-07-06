@@ -60,6 +60,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<class AProjectile> ProjectileClass;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	float FirInterval = 0.2f;
+	
 	FVector AimDirection;
 	FQuat InitialMeshRotation;
 	
