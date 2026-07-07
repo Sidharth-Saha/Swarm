@@ -30,6 +30,8 @@ void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// Set initial speed
+	MovementComponent->Velocity = GetActorForwardVector() * ProjectileSpeed;
 }
 
 // Called every frame

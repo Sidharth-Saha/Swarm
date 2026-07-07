@@ -29,4 +29,7 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = true))
 	TObjectPtr<class UProjectileMovementComponent> MovementComponent;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile", meta = (AllowPrivateAccess = true))
+	float ProjectileSpeed = 2000.0f;
 };
