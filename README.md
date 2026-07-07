@@ -21,7 +21,7 @@ Core mechanics implemented so far:
 
 ## Requirements
 
-- **Unreal Engine 5.x** (built with 5.x — use the matching engine version)
+- **Unreal Engine 5.8.0** (use this engine version to open and build the project)
 - A C++ toolchain for Unreal on your platform:
   - **Windows:** Visual Studio with the "Game development with C++" workload (MSVC + Windows SDK)
 - **Git LFS** — this repository stores binary assets (`.uasset`, `.umap`) via Git LFS.
