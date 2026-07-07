@@ -32,6 +32,8 @@ void AProjectile::BeginPlay()
 	
 	// Set initial speed
 	MovementComponent->Velocity = GetActorForwardVector() * ProjectileSpeed;
+	// Set life span
+	SetLifeSpan(LifeSpan);
 }
 
 // Called every frame
