@@ -3,12 +3,22 @@
 
 #include "Enemies/EnemyBase.h"
 
+#include "Components/SphereComponent.h"
+#include "Components/StaticMeshComponent.h"
+
 
 // Sets default values
 AEnemyBase::AEnemyBase()
 {
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
+	// Initialize root component
+	RootComponent = CreateDefaultSubobject<USphereComponent>("RootComponent");
+	
+	// Initialize mesh component
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
+	Mesh->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
