@@ -15,10 +15,10 @@ AEnemyBase::AEnemyBase()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	// Initialize root component
-	RootComponent = CreateDefaultSubobject<USphereComponent>("RootComponent");
+	RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
 	
 	// Initialize mesh component
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(RootComponent);
 	
 	// Initialize movement component
