@@ -5,6 +5,7 @@
 
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
 
 
 // Sets default values
@@ -19,6 +20,9 @@ AEnemyBase::AEnemyBase()
 	// Initialize mesh component
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	Mesh->SetupAttachment(RootComponent);
+	
+	// Initialize movement component
+	MovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("MovementComponent"));
 }
 
 // Called when the game starts or when spawned
