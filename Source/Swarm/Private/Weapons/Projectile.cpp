@@ -23,6 +23,9 @@ AProjectile::AProjectile()
 	// Initialize movement component
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("MovementComponent"));
 	MovementComponent->ProjectileGravityScale = 0.0f;
+	MovementComponent->SetPlaneConstraintEnabled(true);
+	MovementComponent->SetPlaneConstraintNormal(FVector::UpVector);
+	MovementComponent->bSnapToPlaneAtStart = true;
 }
 
 // Called when the game starts or when spawned

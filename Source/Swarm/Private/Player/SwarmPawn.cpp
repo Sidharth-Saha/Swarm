@@ -39,6 +39,9 @@ ASwarmPawn::ASwarmPawn()
 	
 	// Initialize movement component
 	MovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("MovementComponent"));
+	MovementComponent->SetPlaneConstraintEnabled(true);
+	MovementComponent->SetPlaneConstraintNormal(FVector::UpVector);
+	MovementComponent->bSnapToPlaneAtStart = true;
 }
 
 // Called when the game starts or when spawned
