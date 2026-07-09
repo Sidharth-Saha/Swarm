@@ -6,6 +6,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -36,6 +37,8 @@ void AEnemyBase::BeginPlay()
 void AEnemyBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	TickBehavior(DeltaTime);
 }
 
 // Called to bind functionality to input
@@ -44,3 +47,15 @@ void AEnemyBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+void AEnemyBase::TickBehavior(float DeltaTime)
+{
+	if (APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(this, 0))
+	{
+		const FVector PlayerLocation = PlayerPawn->GetActorLocation();
+		FVector MovementDirection = PlayerLocation - GetActorLocation();
+		if (MovementDirection.Normalize())
+		{
+			AddMovementInput(MovementDirection, MovementSpeed);
+		}
+	}
+}

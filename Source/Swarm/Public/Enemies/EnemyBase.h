@@ -35,4 +35,7 @@ private:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	float MovementSpeed = 500.0f;
+	
+protected:
+	virtual void TickBehavior(float DeltaTime);
 };
