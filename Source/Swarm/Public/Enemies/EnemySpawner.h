@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "EnemySpawner.generated.h"
 
+class AEnemyBase;
+
 UCLASS()
 class SWARM_API AEnemySpawner : public AActor
 {
@@ -22,4 +24,17 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+private:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AEnemyBase> GruntClass;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AEnemyBase> RunnerClass;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AEnemyBase> BruteClass;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AEnemyBase> ShooterClass;
 };
