@@ -52,6 +52,12 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Health")
 	bool IsDead() const;
 	
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void ApplyDamage(float Amount, AActor* DamageInstigator);
+	
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void Heal(float Amount);
+	
 	UPROPERTY(BlueprintAssignable)
 	FOnHealthChanged OnHealthChanged;
 	

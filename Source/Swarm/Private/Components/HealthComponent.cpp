@@ -67,3 +67,36 @@ bool UHealthComponent::IsDead() const
 {
 	return bIsDead;
 }
+
+void UHealthComponent::ApplyDamage(float Amount, AActor* DamageInstigator)
+{
+	if (!bIsDead && Amount > 0.0f)
+	{
+		const float OldHealth = CurrentHealth;
+		CurrentHealth = FMath::Clamp(CurrentHealth - Amount, 0.0f, MaxHealth);
+		const float Delta = CurrentHealth - OldHealth;
+		
+		OnHealthChanged.Broadcast(this, CurrentHealth, MaxHealth, Delta);
+		
+		if (CurrentHealth <= 0.0f)
+		{
+			bIsDead = true;
+			OnDeath.Broadcast(GetOwner(), DamageInstigator);
+		}
+	}
+}
+
+void UHealthComponent::Heal(float Amount)
+{
+	if (!bIsDead && Amount > 0.0f)
+	{
+		const float OldHealth = CurrentHealth;
+		CurrentHealth = FMath::Clamp(CurrentHealth + Amount, 0.0f, MaxHealth);
+		const float Delta = CurrentHealth - OldHealth;
+		
+		if (Delta != 0.0f)
+		{
+			OnHealthChanged.Broadcast(this, CurrentHealth, MaxHealth, Delta);
+		}
+	}
+}
