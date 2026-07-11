@@ -24,4 +24,27 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
+	
+private:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = true))
+	float MaxHealth = 100.0f;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = true))
+	float CurrentHealth;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = true))
+	bool bIsDead = false;
+	
+public:
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetCurrentHealth() const;
+	
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetMaxHealth() const;
+	
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetCurrentHealthPercent() const;
+	
+	UFUNCTION(BlueprintPure, Category = "Health")
+	bool IsDead() const;
 };

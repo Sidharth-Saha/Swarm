@@ -3,6 +3,8 @@
 
 #include "Components/HealthComponent.h"
 
+#include "GameFramework/Actor.h"
+
 
 // Sets default values for this component's properties
 UHealthComponent::UHealthComponent()
@@ -11,7 +13,11 @@ UHealthComponent::UHealthComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	// Set current health to max health
+	CurrentHealth = MaxHealth;
+	
+	// Set actor as alive
+	bIsDead = false;
 }
 
 
@@ -20,8 +26,16 @@ void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	// Check that max health is valid value
+	if (!ensureMsgf(MaxHealth > 0.0f, TEXT("%s has MaxHealth <= 0 (%.1f); clamping to 1."), *GetOwner()->GetName(), MaxHealth))
+	{
+		MaxHealth = 1.0f;
+	}
+	// Set current health to max health
+	CurrentHealth = MaxHealth;
 	
+	// Set actor as alive
+	bIsDead = false;
 }
 
 
@@ -34,3 +48,22 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	// ...
 }
 
+float UHealthComponent::GetCurrentHealth() const
+{
+	return CurrentHealth;
+}
+
+float UHealthComponent::GetMaxHealth() const
+{
+	return MaxHealth;
+}
+
+float UHealthComponent::GetCurrentHealthPercent() const
+{
+	return MaxHealth > 0.0f ? CurrentHealth / MaxHealth : 0.0f;
+}
+
+bool UHealthComponent::IsDead() const
+{
+	return bIsDead;
+}
