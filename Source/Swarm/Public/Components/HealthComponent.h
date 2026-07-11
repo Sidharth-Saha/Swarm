@@ -6,7 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
-
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class SWARM_API UHealthComponent : public UActorComponent
 {
@@ -24,6 +23,11 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
+	
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FOnHealthChanged, UHealthComponent*, HealthComponent, float, NewHealth, float, MaxHealth,
+		float,Delta);
+	
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnDeath, AActor*, DeadActor, AActor*, Instigator);
 	
 private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = true))
@@ -47,4 +51,10 @@ public:
 	
 	UFUNCTION(BlueprintPure, Category = "Health")
 	bool IsDead() const;
+	
+	UPROPERTY(BlueprintAssignable)
+	FOnHealthChanged OnHealthChanged;
+	
+	UPROPERTY(BlueprintAssignable)
+	FOnDeath OnDeath;
 };
