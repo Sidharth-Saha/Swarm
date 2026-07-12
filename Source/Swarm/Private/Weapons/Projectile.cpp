@@ -3,6 +3,7 @@
 
 #include "Weapons/Projectile.h"
 
+#include "Components/HealthComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
@@ -37,6 +38,10 @@ void AProjectile::BeginPlay()
 	MovementComponent->Velocity = GetActorForwardVector() * ProjectileSpeed;
 	// Set life span
 	SetLifeSpan(LifeSpan);
+	
+	// Bind collision function
+	USphereComponent* SphereComponent = Cast<USphereComponent>(RootComponent);
+	SphereComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnSphereOverlap);
 }
 
 // Called every frame
@@ -45,3 +50,16 @@ void AProjectile::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, 
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor && OtherActor == this && OtherActor == GetInstigator())
+	{
+		if (UHealthComponent* HealthComponent = OtherActor->FindComponentByClass<UHealthComponent>())
+		{
+			HealthComponent->ApplyDamage(Damage, GetInstigator());
+		}
+		
+		Destroy();
+	}
+}
