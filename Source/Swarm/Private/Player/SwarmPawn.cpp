@@ -7,6 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Components/SphereComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/HealthComponent.h"
 #include "Engine/LocalPlayer.h"
 #include "Engine/World.h"
 #include "GameFramework/FloatingPawnMovement.h"
@@ -42,6 +43,9 @@ ASwarmPawn::ASwarmPawn()
 	MovementComponent->SetPlaneConstraintEnabled(true);
 	MovementComponent->SetPlaneConstraintNormal(FVector::UpVector);
 	MovementComponent->bSnapToPlaneAtStart = true;
+	
+	// Initialize health component
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 }
 
 // Called when the game starts or when spawned

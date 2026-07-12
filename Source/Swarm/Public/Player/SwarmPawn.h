@@ -66,6 +66,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	float MuzzleOffset = 75.0f;
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UHealthComponent> HealthComponent;
+	
 	FVector AimDirection;
 	FQuat InitialMeshRotation;
 	

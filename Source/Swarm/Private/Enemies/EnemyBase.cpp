@@ -3,6 +3,7 @@
 
 #include "Enemies/EnemyBase.h"
 
+#include "Components/HealthComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
@@ -27,6 +28,9 @@ AEnemyBase::AEnemyBase()
 	MovementComponent->SetPlaneConstraintEnabled(true);
 	MovementComponent->SetPlaneConstraintNormal(FVector::UpVector);
 	MovementComponent->bSnapToPlaneAtStart = true;
+	
+	// Initialize health component
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 }
 
 // Called when the game starts or when spawned

@@ -36,6 +36,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	float MovementSpeed = 500.0f;
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UHealthComponent> HealthComponent;
+	
 protected:
 	virtual void TickBehavior(float DeltaTime);
 };
