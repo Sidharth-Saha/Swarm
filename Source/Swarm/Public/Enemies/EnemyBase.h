@@ -41,4 +41,7 @@ private:
 	
 protected:
 	virtual void TickBehavior(float DeltaTime);
+	
+	UFUNCTION()
+	void HandleDeath(AActor* DeadActor, AActor* Killer);
 };

@@ -38,6 +38,8 @@ void AEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// Bind death delegate
+	HealthComponent->OnDeath.AddDynamic(this, &AEnemyBase::HandleDeath);
 }
 
 // Called every frame
@@ -65,4 +67,9 @@ void AEnemyBase::TickBehavior(float DeltaTime)
 			AddMovementInput(MovementDirection, MovementSpeed);
 		}
 	}
+}
+
+void AEnemyBase::HandleDeath(AActor* DeadActor, AActor* Killer)
+{
+	Destroy();
 }
