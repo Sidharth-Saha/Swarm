@@ -1137,6 +1137,24 @@
     </Project>
   </Folder>
   <Folder Name="/Rules/">
+    <Project Path="../../UnrealEngine/Engine/Intermediate/Build/BuildRulesProjects/MarketplaceRules/MarketplaceRules.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
     <Project Path="../../UnrealEngine/Engine/Intermediate/Build/BuildRulesProjects/UE5ProgramRules/UE5ProgramRules.csproj">
       <BuildType Solution="Debug Client|*" Project="Development" />
       <BuildType Solution="Debug Editor|*" Project="Development" />
