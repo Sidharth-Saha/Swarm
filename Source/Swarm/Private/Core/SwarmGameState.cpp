@@ -11,3 +11,12 @@ void ASwarmGameState::SetGameState(EGameState NewState)
 		OnGameStateChanged.Broadcast(NewState);
 	}
 }
+
+void ASwarmGameState::AddScore(int32 Amount)
+{
+	if (Amount > 0)
+	{
+		GameScore += Amount;
+		OnGameScoreChanged.Broadcast(GameScore, Amount);
+	}
+}

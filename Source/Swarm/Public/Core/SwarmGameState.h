@@ -16,6 +16,8 @@ enum class EGameState : uint8
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameStateChanged, EGameState, NewState);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnGameScoreChanged, int32, NewScore, int32, Delta);
+
 /**
  * 
  */
@@ -28,6 +30,8 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Game State", meta = (AllowPrivateAccess = "true"))
 	EGameState GameState = EGameState::MainMenu;
 	
+	int32 GameScore = 0;
+	
 public:
 	void SetGameState(EGameState NewState);
 	UFUNCTION(BlueprintCallable)
@@ -35,4 +39,13 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, Category = "Game State")
 	FOnGameStateChanged OnGameStateChanged;
+	
+	UFUNCTION(BlueprintPure, Category = "Game Score")
+	int32 GetGameScore() const { return GameScore; }
+	
+	UFUNCTION(BlueprintCallable, Category = "Game Score")
+	void AddScore(int32 Amount);
+	
+	UPROPERTY(BlueprintAssignable, Category = "Game Score")
+	FOnGameScoreChanged OnGameScoreChanged;
 };
