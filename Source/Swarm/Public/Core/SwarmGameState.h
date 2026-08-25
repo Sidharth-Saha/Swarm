@@ -32,6 +32,9 @@ private:
 	
 	int32 GameScore = 0;
 	
+	float RunTimeStart = 0.0f;
+	float FinalSurviveTime = 0.0f;
+	
 public:
 	void SetGameState(EGameState NewState);
 	UFUNCTION(BlueprintCallable)
@@ -48,4 +51,10 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, Category = "Game Score")
 	FOnGameScoreChanged OnGameScoreChanged;
+	
+	UFUNCTION(BlueprintPure, Category = "Game Score")
+	float GetSurvivalTime() const
+	{
+		return GetWorld()->GetTimeSeconds() - RunTimeStart;
+	}
 };
