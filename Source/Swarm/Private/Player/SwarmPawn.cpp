@@ -8,6 +8,7 @@
 #include "Components/SphereComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/HealthComponent.h"
+#include "Core/SwarmGameMode.h"
 #include "Engine/LocalPlayer.h"
 #include "Engine/World.h"
 #include "GameFramework/FloatingPawnMovement.h"
@@ -173,6 +174,9 @@ void ASwarmPawn::UpdateMeshTransform()
 
 void ASwarmPawn::HandleDeath(AActor* DeadActor, AActor* Killer)
 {
-	// TODO implement game over
+	if (ASwarmGameMode* GameMode = Cast<ASwarmGameMode>(GetWorld()->GetAuthGameMode()))
+	{
+		GameMode->OnPlayerDeath();
+	}
 	Destroy();
 }

@@ -3,3 +3,12 @@
 
 #include "Core/SwarmGameMode.h"
 
+#include "Core/SwarmGameState.h"
+
+void ASwarmGameMode::OnPlayerDeath()
+{
+	if (ASwarmGameState* SwarmGameState = GetGameState<ASwarmGameState>())
+	{
+		SwarmGameState->SetGameState(EGameState::GameOver);
+	}
+}
