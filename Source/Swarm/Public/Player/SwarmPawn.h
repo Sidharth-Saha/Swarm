@@ -80,4 +80,7 @@ private:
 	
 	void UpdateMouseAim();
 	void UpdateMeshTransform();
+	
+	UFUNCTION()
+	void HandleDeath(AActor* DeadActor, AActor* Killer);
 };

@@ -70,6 +70,9 @@ void ASwarmPawn::BeginPlay()
 	
 	// Cache initial mesh rotation
 	InitialMeshRotation = Mesh->GetRelativeRotation().Quaternion();
+	
+	// Bind death function
+	HealthComponent->OnDeath.AddDynamic(this, &ASwarmPawn::HandleDeath);
 }
 
 // Called every frame
@@ -166,4 +169,10 @@ void ASwarmPawn::UpdateMeshTransform()
 {
 	const FQuat Final = AimDirection.ToOrientationQuat() * InitialMeshRotation;
 	Mesh->SetRelativeRotation(Final);
+}
+
+void ASwarmPawn::HandleDeath(AActor* DeadActor, AActor* Killer)
+{
+	// TODO implement game over
+	Destroy();
 }
