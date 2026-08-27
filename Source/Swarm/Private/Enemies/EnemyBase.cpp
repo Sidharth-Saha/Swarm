@@ -3,8 +3,8 @@
 
 #include "Enemies/EnemyBase.h"
 
+#include "Components/BoxComponent.h"
 #include "Components/HealthComponent.h"
-#include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Kismet/GameplayStatics.h"
@@ -17,7 +17,7 @@ AEnemyBase::AEnemyBase()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	// Initialize root component
-	RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
+	RootComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("RootComponent"));
 	
 	// Initialize mesh component
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
@@ -72,4 +72,18 @@ void AEnemyBase::TickBehavior(float DeltaTime)
 void AEnemyBase::HandleDeath(AActor* DeadActor, AActor* Killer)
 {
 	Destroy();
+}
+
+void AEnemyBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
+	UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor && OtherActor != this)
+	{
+		if (UHealthComponent* PlayerHealth = OtherActor->FindComponentByClass<UHealthComponent>())
+		{
+			PlayerHealth->ApplyDamage(Damage, this);
+			
+			Destroy();
+		}
+	}
 }
