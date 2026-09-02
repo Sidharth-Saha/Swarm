@@ -31,10 +31,10 @@ private:
 	TObjectPtr<class UBoxComponent> CollisionBox;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Mesh", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* Mesh;
+	TObjectPtr<UStaticMeshComponent> Mesh;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
-	class UFloatingPawnMovement* MovementComponent;
+	TObjectPtr<class UFloatingPawnMovement> MovementComponent;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	float MovementSpeed = 500.0f;
