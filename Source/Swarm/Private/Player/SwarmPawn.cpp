@@ -25,6 +25,7 @@ ASwarmPawn::ASwarmPawn()
 	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionSphere"));
 	CollisionSphere->SetSphereRadius(45.0f);
 	CollisionSphere->SetGenerateOverlapEvents(true);
+	CollisionSphere->SetCollisionProfileName(TEXT("PlayerPreset"));
 	
 	// Assign root component
 	RootComponent = CollisionSphere;
