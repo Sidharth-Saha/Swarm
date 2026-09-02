@@ -24,6 +24,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class USphereComponent> CollisionSphere;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Mesh", meta = (AllowPrivateAccess = true))
 	TObjectPtr<UStaticMeshComponent> Mesh;
 	

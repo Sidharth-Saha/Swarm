@@ -16,8 +16,13 @@ AEnemyBase::AEnemyBase()
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	// Initialize root component
-	RootComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("RootComponent"));
+	// Initialize collision box
+	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
+	CollisionBox->SetBoxExtent(FVector(45.0f, 45.0f, 45.0f));
+	CollisionBox->SetGenerateOverlapEvents(true);
+	
+	// Assign root component
+	RootComponent = CollisionBox;
 	
 	// Initialize mesh component
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));

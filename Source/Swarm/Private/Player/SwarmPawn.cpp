@@ -21,8 +21,13 @@ ASwarmPawn::ASwarmPawn()
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	// Initialize root component
-	RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
+	// Initialize collision sphere
+	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionSphere"));
+	CollisionSphere->SetSphereRadius(45.0f);
+	CollisionSphere->SetGenerateOverlapEvents(true);
+	
+	// Assign root component
+	RootComponent = CollisionSphere;
 	
 	// Initialize mesh
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));

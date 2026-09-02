@@ -14,8 +14,13 @@ AProjectile::AProjectile()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	// Initialize root component
-	RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
+	// Initialize collision sphere
+	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionSphere"));
+	CollisionSphere->SetSphereRadius(12.0f);
+	CollisionSphere->SetGenerateOverlapEvents(true);
+	
+	// Assign root component
+	RootComponent = CollisionSphere;
 	
 	// Initialize the mesh
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
