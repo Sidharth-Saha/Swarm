@@ -83,7 +83,7 @@ void AEnemyBase::HandleDeath(AActor* DeadActor, AActor* Killer)
 void AEnemyBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
 	UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor && OtherActor != this)
+	if (OtherActor)
 	{
 		if (UHealthComponent* PlayerHealth = OtherActor->FindComponentByClass<UHealthComponent>())
 		{
