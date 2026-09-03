@@ -16,4 +16,7 @@ class SWARM_API ASwarmGameMode : public AGameModeBase
 	
 public:
 	void OnPlayerDeath();
+	
+protected:
+	virtual APawn* SpawnDefaultPawnAtTransform_Implementation(AController* NewPlayer, const FTransform& SpawnTransform) override;
 };
