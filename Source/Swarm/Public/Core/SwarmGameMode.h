@@ -15,5 +15,7 @@ class SWARM_API ASwarmGameMode : public AGameModeBase
 	GENERATED_BODY()
 	
 public:
+	ASwarmGameMode();
+	
 	void OnPlayerDeath();
 };

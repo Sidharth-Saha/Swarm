@@ -5,6 +5,11 @@
 
 #include "Core/SwarmGameState.h"
 
+ASwarmGameMode::ASwarmGameMode()
+{
+	GameStateClass = ASwarmGameState::StaticClass();
+}
+
 void ASwarmGameMode::OnPlayerDeath()
 {
 	if (ASwarmGameState* SwarmGameState = GetGameState<ASwarmGameState>())
