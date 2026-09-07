@@ -45,6 +45,9 @@ void AEnemyBase::BeginPlay()
 	
 	// Bind death delegate
 	HealthComponent->OnDeath.AddDynamic(this, &AEnemyBase::HandleDeath);
+	
+	// Bind collision function
+	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AEnemyBase::OnOverlapBegin);
 }
 
 // Called every frame
