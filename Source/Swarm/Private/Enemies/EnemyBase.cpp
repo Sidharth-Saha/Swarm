@@ -75,6 +75,7 @@ void AEnemyBase::TickBehavior(float DeltaTime)
 	{
 		const FVector PlayerLocation = PlayerPawn->GetActorLocation();
 		FVector MovementDirection = PlayerLocation - GetActorLocation();
+		MovementDirection.Z = 0.0f;
 		if (MovementDirection.Normalize())
 		{
 			AddMovementInput(MovementDirection);
