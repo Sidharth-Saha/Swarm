@@ -50,6 +50,9 @@ void AEnemyBase::BeginPlay()
 	
 	// Bind collision function
 	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AEnemyBase::OnOverlapBegin);
+	
+	// Set max speed
+	MovementComponent->MaxSpeed = MovementSpeed;
 }
 
 // Called every frame
@@ -74,7 +77,7 @@ void AEnemyBase::TickBehavior(float DeltaTime)
 		FVector MovementDirection = PlayerLocation - GetActorLocation();
 		if (MovementDirection.Normalize())
 		{
-			AddMovementInput(MovementDirection, MovementSpeed);
+			AddMovementInput(MovementDirection);
 		}
 	}
 }
