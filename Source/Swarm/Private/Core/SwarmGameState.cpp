@@ -14,7 +14,7 @@ void ASwarmGameState::SetGameState(EGameState NewState)
 		}
 		else if (GameState == EGameState::GameOver)
 		{
-			FinalSurviveTime = GetWorld()->GetTimeSeconds();
+			FinalSurviveTime = (GetWorld()->GetTimeSeconds()) - RunTimeStart;
 		}
 		
 		OnGameStateChanged.Broadcast(NewState);
