@@ -45,8 +45,7 @@ void AProjectile::BeginPlay()
 	SetLifeSpan(LifeSpan);
 	
 	// Bind collision function
-	USphereComponent* SphereComponent = Cast<USphereComponent>(RootComponent);
-	SphereComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnSphereOverlap);
+	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnSphereOverlap);
 }
 
 // Called every frame
