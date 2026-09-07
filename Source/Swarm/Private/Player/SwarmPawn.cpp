@@ -81,6 +81,9 @@ void ASwarmPawn::BeginPlay()
 	
 	// Bind death function
 	HealthComponent->OnDeath.AddDynamic(this, &ASwarmPawn::HandleDeath);
+	
+	// Set movement speed
+	MovementComponent->MaxSpeed = MovementSpeed;
 }
 
 // Called every frame
