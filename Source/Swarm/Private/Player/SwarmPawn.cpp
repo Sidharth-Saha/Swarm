@@ -158,6 +158,7 @@ void ASwarmPawn::StartFire(const FInputActionValue& Value)
 void ASwarmPawn::UpdateMouseAim()
 {
 	APlayerController* PC = Cast<APlayerController>(GetController());
+	if (!PC) { return; }
 	
 	FVector WorldOrigin, WorldDirection;
 	if (PC->DeprojectMousePositionToWorld(WorldOrigin, WorldDirection))
