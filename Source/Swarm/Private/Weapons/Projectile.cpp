@@ -31,6 +31,7 @@ AProjectile::AProjectile()
 	// Initialize movement component
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("MovementComponent"));
 	MovementComponent->ProjectileGravityScale = 0.0f;
+	MovementComponent->OnProjectileStop.AddDynamic(this, &AProjectile::OnProjectileStopped);
 	/*
 	MovementComponent->SetPlaneConstraintEnabled(true);
 	MovementComponent->SetPlaneConstraintNormal(FVector::UpVector);
@@ -70,4 +71,9 @@ void AProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		
 		Destroy();
 	}
+}
+
+void AProjectile::OnProjectileStopped(const FHitResult& ImpactResult)
+{
+	Destroy();
 }
