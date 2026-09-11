@@ -20,6 +20,7 @@ AEnemyBase::AEnemyBase()
 	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
 	CollisionBox->SetBoxExtent(FVector(45.0f, 45.0f, 45.0f));
 	CollisionBox->SetGenerateOverlapEvents(true);
+	CollisionBox->SetCollisionProfileName(TEXT("EnemyPreset"));
 	
 	// Assign root component
 	RootComponent = CollisionBox;

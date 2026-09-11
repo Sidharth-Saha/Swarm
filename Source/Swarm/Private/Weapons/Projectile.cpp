@@ -18,6 +18,7 @@ AProjectile::AProjectile()
 	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionSphere"));
 	CollisionSphere->SetSphereRadius(12.0f);
 	CollisionSphere->SetGenerateOverlapEvents(true);
+	CollisionSphere->SetCollisionProfileName(TEXT("PlayerProjectilePreset"));
 	
 	// Assign root component
 	RootComponent = CollisionSphere;
