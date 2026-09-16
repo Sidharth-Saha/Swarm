@@ -32,11 +32,8 @@ AEnemyBase::AEnemyBase()
 	
 	// Initialize movement component
 	MovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("MovementComponent"));
-	/*
 	MovementComponent->SetPlaneConstraintEnabled(true);
-	MovementComponent->SetPlaneConstraintNormal(FVector::UpVector);
-	MovementComponent->bSnapToPlaneAtStart = true;
-	*/
+	MovementComponent->SetPlaneConstraintAxisSetting(EPlaneConstraintAxisSetting::Z);
 	
 	// Initialize health component
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
@@ -55,6 +52,9 @@ void AEnemyBase::BeginPlay()
 	
 	// Set max speed
 	MovementComponent->MaxSpeed = MovementSpeed;
+	
+	// Set movement plane origin
+	MovementComponent->SetPlaneConstraintOrigin(GetActorLocation());
 }
 
 // Called every frame

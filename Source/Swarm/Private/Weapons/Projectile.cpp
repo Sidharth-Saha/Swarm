@@ -32,11 +32,8 @@ AProjectile::AProjectile()
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("MovementComponent"));
 	MovementComponent->ProjectileGravityScale = 0.0f;
 	MovementComponent->OnProjectileStop.AddDynamic(this, &AProjectile::OnProjectileStopped);
-	/*
 	MovementComponent->SetPlaneConstraintEnabled(true);
-	MovementComponent->SetPlaneConstraintNormal(FVector::UpVector);
-	MovementComponent->bSnapToPlaneAtStart = true;
-	*/
+	MovementComponent->SetPlaneConstraintAxisSetting(EPlaneConstraintAxisSetting::Z);
 }
 
 // Called when the game starts or when spawned
@@ -51,6 +48,9 @@ void AProjectile::BeginPlay()
 	
 	// Bind collision function
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnSphereOverlap);
+	
+	// Set movement plane origin
+	MovementComponent->SetPlaneConstraintOrigin(GetActorLocation());
 }
 
 // Called every frame
