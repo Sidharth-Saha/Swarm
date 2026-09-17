@@ -37,7 +37,7 @@ private:
 	TObjectPtr<class UFloatingPawnMovement> MovementComponent;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
-	float MovementSpeed = 500.0f;
+	float MovementSpeed = 1100.0f;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UHealthComponent> HealthComponent;
