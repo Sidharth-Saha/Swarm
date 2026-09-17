@@ -37,6 +37,9 @@ AEnemyBase::AEnemyBase()
 	
 	// Initialize health component
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	
+	// Setup controller
+	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
 
 // Called when the game starts or when spawned
