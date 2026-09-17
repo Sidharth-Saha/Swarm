@@ -19,9 +19,11 @@ void AEnemySpawner::BeginPlay()
 	Super::BeginPlay();
 	
 	ensureMsgf(GruntClass, TEXT("GruntClass not set on %s"), *GetName());
+	/*
 	ensureMsgf(RunnerClass, TEXT("RunnerClass not set on %s"), *GetName());
 	ensureMsgf(BruteClass, TEXT("BruteClass not set on %s"), *GetName());
 	ensureMsgf(ShooterClass, TEXT("ShooterClass not set on %s"), *GetName());
+	*/
 }
 
 // Called every frame
