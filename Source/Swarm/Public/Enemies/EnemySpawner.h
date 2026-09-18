@@ -40,7 +40,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AEnemyBase> ShooterClass;
 	
-	float SpawnInterval = 10.0f;
+	float SpawnInterval = 2.0f;
 	
 	FTimerHandle SpawnTimerHandle;
 	
