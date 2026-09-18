@@ -4,6 +4,7 @@
 #include "Enemies/EnemySpawner.h"
 
 #include "Enemies/EnemyBase.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -44,9 +45,18 @@ void AEnemySpawner::Tick(float DeltaTime)
 
 void AEnemySpawner::SpawnEnemy()
 {
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Owner = this;
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	const float Angle = FMath::RandRange(0.0f, 2.0f * PI);
+	const FVector Offset(FMath::Cos(Angle) * SpawnRadius, FMath::Sin(Angle) * SpawnRadius, 0);
 	
-	GetWorld()->SpawnActor<AEnemyBase>(GruntClass, GetActorLocation(), GetActorRotation(), SpawnParams);
+	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	if (PlayerPawn)
+	{
+		const FVector SpawnLocation = PlayerPawn->GetActorLocation() + Offset;
+		
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	
+		GetWorld()->SpawnActor<AEnemyBase>(GruntClass, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
+	}
 }

@@ -42,6 +42,8 @@ private:
 	
 	float SpawnInterval = 2.0f;
 	
+	float SpawnRadius = 10000.0f;
+	
 	FTimerHandle SpawnTimerHandle;
 	
 	void SpawnEnemy();
