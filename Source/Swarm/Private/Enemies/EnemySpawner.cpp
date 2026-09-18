@@ -25,11 +25,15 @@ void AEnemySpawner::BeginPlay()
 	ensureMsgf(ShooterClass, TEXT("ShooterClass not set on %s"), *GetName());
 	*/
 	
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Owner = this;
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &AEnemySpawner::SpawnEnemy, SpawnInterval, true);
+	SpawnEnemy();
+}
+
+void AEnemySpawner::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	GetWorldTimerManager().ClearTimer(SpawnTimerHandle);
 	
-	GetWorld()->SpawnActor<AEnemyBase>(GruntClass, GetActorLocation(), GetActorRotation(), SpawnParams);
+	Super::EndPlay(EndPlayReason);
 }
 
 // Called every frame
@@ -38,3 +42,11 @@ void AEnemySpawner::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AEnemySpawner::SpawnEnemy()
+{
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	
+	GetWorld()->SpawnActor<AEnemyBase>(GruntClass, GetActorLocation(), GetActorRotation(), SpawnParams);
+}

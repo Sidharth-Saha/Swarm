@@ -20,6 +20,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 public:
 	// Called every frame
@@ -37,4 +39,10 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AEnemyBase> ShooterClass;
+	
+	float SpawnInterval = 10.0f;
+	
+	FTimerHandle SpawnTimerHandle;
+	
+	void SpawnEnemy();
 };
