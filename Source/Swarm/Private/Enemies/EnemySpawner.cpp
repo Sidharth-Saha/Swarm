@@ -24,6 +24,12 @@ void AEnemySpawner::BeginPlay()
 	ensureMsgf(BruteClass, TEXT("BruteClass not set on %s"), *GetName());
 	ensureMsgf(ShooterClass, TEXT("ShooterClass not set on %s"), *GetName());
 	*/
+	
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	
+	GetWorld()->SpawnActor<AEnemyBase>(GruntClass, GetActorLocation(), GetActorRotation(), SpawnParams);
 }
 
 // Called every frame
