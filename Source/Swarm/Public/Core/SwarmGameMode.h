@@ -44,5 +44,10 @@ private:
 	
 	FTimerHandle SpawnTimerHandle;
 	
+	int AliveEnemyCount = 0;
+	
 	void SpawnEnemy();
+	
+	UFUNCTION()
+	void HandleEnemyDestroyed(AActor* DestroyedActor);
 };

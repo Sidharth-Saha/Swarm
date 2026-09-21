@@ -53,7 +53,16 @@ void ASwarmGameMode::SpawnEnemy()
 		FActorSpawnParameters SpawnParams;
 		SpawnParams.Owner = this;
 		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	
-		GetWorld()->SpawnActor<AEnemyBase>(GruntClass, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
+
+		if (AEnemyBase* Enemy = GetWorld()->SpawnActor<AEnemyBase>(GruntClass, SpawnLocation, FRotator::ZeroRotator, SpawnParams))
+		{
+			AliveEnemyCount++;
+			Enemy->OnDestroyed.AddDynamic(this, &ASwarmGameMode::HandleEnemyDestroyed);
+		}
 	}
+}
+
+void ASwarmGameMode::HandleEnemyDestroyed(AActor* DestroyedActor)
+{
+	AliveEnemyCount--;
 }
