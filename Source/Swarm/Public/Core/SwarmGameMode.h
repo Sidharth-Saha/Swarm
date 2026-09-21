@@ -38,7 +38,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AEnemyBase> ShooterClass;
 	
-	float SpawnInterval = 2.0f;
+	float SpawnInterval = 1.0f;
 	
 	float SpawnRadius = 2000.0f;
 	
