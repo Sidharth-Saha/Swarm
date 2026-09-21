@@ -64,5 +64,6 @@ void ASwarmGameMode::SpawnEnemy()
 
 void ASwarmGameMode::HandleEnemyDestroyed(AActor* DestroyedActor)
 {
+	ensure(AliveEnemyCount > 0);
 	AliveEnemyCount--;
 }
