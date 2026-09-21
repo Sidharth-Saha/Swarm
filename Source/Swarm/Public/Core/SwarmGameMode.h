@@ -6,6 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "SwarmGameMode.generated.h"
 
+class AEnemyBase;
+
 /**
  * 
  */
@@ -18,4 +20,29 @@ public:
 	ASwarmGameMode();
 	
 	void OnPlayerDeath();
+	
+protected:
+	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	
+private:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AEnemyBase> GruntClass;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AEnemyBase> RunnerClass;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AEnemyBase> BruteClass;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AEnemyBase> ShooterClass;
+	
+	float SpawnInterval = 2.0f;
+	
+	float SpawnRadius = 2000.0f;
+	
+	FTimerHandle SpawnTimerHandle;
+	
+	void SpawnEnemy();
 };
