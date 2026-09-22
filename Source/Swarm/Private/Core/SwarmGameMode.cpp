@@ -54,10 +54,20 @@ void ASwarmGameMode::SpawnEnemy()
 		SpawnParams.Owner = this;
 		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-		if (AEnemyBase* Enemy = GetWorld()->SpawnActor<AEnemyBase>(GruntClass, SpawnLocation, FRotator::ZeroRotator, SpawnParams))
+		if (AliveEnemyCount < MaxEnemies)
 		{
-			AliveEnemyCount++;
-			Enemy->OnDestroyed.AddDynamic(this, &ASwarmGameMode::HandleEnemyDestroyed);
+			if (AEnemyBase* Enemy = GetWorld()->SpawnActor<AEnemyBase>(GruntClass, SpawnLocation, FRotator::ZeroRotator, SpawnParams))
+			{
+				AliveEnemyCount++;
+				Enemy->OnDestroyed.AddDynamic(this, &ASwarmGameMode::HandleEnemyDestroyed);
+				/*
+				if (GEngine)
+				{
+					GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Yellow,
+						FString::Printf(TEXT("Alive enemies: %d"), AliveEnemyCount));
+				}
+				*/
+			}
 		}
 	}
 }
@@ -66,4 +76,11 @@ void ASwarmGameMode::HandleEnemyDestroyed(AActor* DestroyedActor)
 {
 	ensure(AliveEnemyCount > 0);
 	AliveEnemyCount--;
+	/*
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Yellow,
+			FString::Printf(TEXT("Alive enemies: %d"), AliveEnemyCount));
+	}
+	*/
 }
