@@ -18,6 +18,7 @@ void ASwarmGameMode::OnPlayerDeath()
 	{
 		SwarmGameState->SetGameState(EGameState::GameOver);
 	}
+	GetWorldTimerManager().ClearTimer(SpawnTimerHandle);
 }
 
 void ASwarmGameMode::BeginPlay()
