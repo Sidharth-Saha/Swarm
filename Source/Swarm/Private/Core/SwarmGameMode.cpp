@@ -31,6 +31,10 @@ void ASwarmGameMode::BeginPlay()
 	ensureMsgf(ShooterClass, TEXT("ShooterClass not set on %s"), *GetName());
 	*/
 	
+	if (ASwarmGameState* SwarmGameState = GetGameState<ASwarmGameState>())
+	{
+		SwarmGameState->SetGameState(EGameState::Playing);
+	}
 	GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &ASwarmGameMode::SpawnEnemy, SpawnInterval, true);
 }
 
