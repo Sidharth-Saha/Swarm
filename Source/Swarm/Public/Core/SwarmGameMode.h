@@ -47,9 +47,10 @@ private:
 	
 	FTimerHandle SpawnTimerHandle;
 	
-	int AliveEnemyCount = 0;
-	
 	void SpawnEnemy();
+	
+	UPROPERTY()
+	TArray<TWeakObjectPtr<AEnemyBase>> LiveEnemies;
 	
 	UFUNCTION()
 	void HandleEnemyDestroyed(AActor* DestroyedActor);

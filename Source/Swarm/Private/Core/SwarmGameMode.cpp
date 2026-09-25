@@ -37,6 +37,8 @@ void ASwarmGameMode::BeginPlay()
 		SwarmGameState->SetGameState(EGameState::Playing);
 	}
 	GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &ASwarmGameMode::SpawnEnemy, SpawnInterval, true);
+	
+	LiveEnemies.Reserve(MaxEnemies);
 }
 
 void ASwarmGameMode::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -59,17 +61,17 @@ void ASwarmGameMode::SpawnEnemy()
 		SpawnParams.Owner = this;
 		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-		if (AliveEnemyCount < MaxEnemies)
+		if (LiveEnemies.Num() < MaxEnemies)
 		{
 			if (AEnemyBase* Enemy = GetWorld()->SpawnActor<AEnemyBase>(GruntClass, SpawnLocation, FRotator::ZeroRotator, SpawnParams))
 			{
-				AliveEnemyCount++;
+				LiveEnemies.Add(Enemy);
 				Enemy->OnDestroyed.AddDynamic(this, &ASwarmGameMode::HandleEnemyDestroyed);
 				/*
 				if (GEngine)
 				{
 					GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Yellow,
-						FString::Printf(TEXT("Alive enemies: %d"), AliveEnemyCount));
+						FString::Printf(TEXT("Alive enemies: %d"), LiveEnemies.Num()));
 				}
 				*/
 			}
@@ -79,13 +81,17 @@ void ASwarmGameMode::SpawnEnemy()
 
 void ASwarmGameMode::HandleEnemyDestroyed(AActor* DestroyedActor)
 {
-	ensure(AliveEnemyCount > 0);
-	AliveEnemyCount--;
+	ensure(LiveEnemies.Num() > 0);
+	AEnemyBase* Enemy = Cast<AEnemyBase>(DestroyedActor);
+	if (ensure(Enemy))
+	{
+		LiveEnemies.RemoveSingleSwap(Enemy);
+	}
 	/*
 	if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Yellow,
-			FString::Printf(TEXT("Alive enemies: %d"), AliveEnemyCount));
+			FString::Printf(TEXT("Alive enemies: %d"), LiveEnemies.Num()));
 	}
 	*/
 }
