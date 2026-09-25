@@ -86,6 +86,14 @@ void ASwarmGameMode::HandleEnemyDestroyed(AActor* DestroyedActor)
 	if (ensure(Enemy))
 	{
 		LiveEnemies.RemoveSingleSwap(Enemy);
+		if (Enemy->IsDead())
+		{
+			ASwarmGameState* SwarmGameState = GetGameState<ASwarmGameState>();
+			if (ensure(SwarmGameState))
+			{
+				SwarmGameState->AddScore(Enemy->GetPoints());
+			}
+		}
 	}
 	/*
 	if (GEngine)
