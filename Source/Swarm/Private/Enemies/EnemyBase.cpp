@@ -111,3 +111,8 @@ bool AEnemyBase::IsDead() const
 {
 	return HealthComponent->IsDead();
 }
+
+int32 AEnemyBase::GetPoints() const
+{
+	return Points;
+}

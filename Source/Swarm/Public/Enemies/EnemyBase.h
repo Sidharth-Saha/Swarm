@@ -28,6 +28,9 @@ public:
 	
 	bool IsDead() const;
 	
+	UFUNCTION(BlueprintPure, Category = "Score")
+	int32 GetPoints() const;
+	
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UBoxComponent> CollisionBox;
@@ -48,7 +51,8 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage", meta = (AllowPrivateAccess = "true"))
 	float Damage = 10.0f;
 	
-	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Score", meta = (AllowPrivateAccess = "true"))
+	int32 Points = 100;
 	
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
