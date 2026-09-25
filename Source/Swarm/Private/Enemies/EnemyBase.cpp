@@ -106,3 +106,8 @@ void AEnemyBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 		}
 	}
 }
+
+bool AEnemyBase::IsDead() const
+{
+	return HealthComponent->IsDead();
+}
