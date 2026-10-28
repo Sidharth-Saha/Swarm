@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "MainMenuPlayerController.generated.h"
 
+class UMainMenuWidget;
 /**
  * 
  */
@@ -13,4 +14,14 @@ UCLASS()
 class SWARM_API AMainMenuPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+	
+protected:
+	virtual void BeginPlay() override;
+	
+private:
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<UMainMenuWidget> MenuWidgetClass;
+	
+	UPROPERTY()
+	TObjectPtr<UMainMenuWidget> MenuWidget;
 };
